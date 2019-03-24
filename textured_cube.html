@@ -1,0 +1,58 @@
+<html>
+	<head>
+		<title>My first three.js app</title>
+		<style>
+			body { margin: 0; }
+			canvas { width: 100%; background-color:#FFFFFF; height: 100% }
+		</style>
+	</head>
+	<body>
+		<script src="build/three.js"></script>
+		<script>
+			//create scene and camera
+			var scene = new THREE.Scene();
+			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+			//Add images to cube
+			var materials = [
+       new THREE.MeshBasicMaterial({
+           map: new THREE.TextureLoader().load('leaves.png')
+       }),
+			 new THREE.MeshBasicMaterial({
+					 map: new THREE.TextureLoader().load('checkered.png')
+			 }),
+			 new THREE.MeshBasicMaterial({
+					 map: new THREE.TextureLoader().load('leaves.png')
+			 }),
+			 new THREE.MeshBasicMaterial({
+					 map: new THREE.TextureLoader().load('checkered.png')
+			 }),
+			 new THREE.MeshBasicMaterial({
+					 map: new THREE.TextureLoader().load('leaves.png')
+			 }),
+			 new THREE.MeshBasicMaterial({
+					 map: new THREE.TextureLoader().load('checkered.png')
+			 })
+    ];
+    cube = new THREE.Mesh(
+        new THREE.BoxGeometry(1,1,1), materials);
+			//add cube to scene
+			scene.add( cube );
+
+			camera.position.z = 5;
+
+			var animate = function () {
+				requestAnimationFrame( animate );
+
+				cube.rotation.x += 0.01;
+				cube.rotation.y += 0.01;
+
+				renderer.render( scene, camera );
+			};
+
+			animate();
+		</script>
+	</body>
+</html>
